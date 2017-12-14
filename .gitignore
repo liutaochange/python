@@ -40,7 +40,6 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
-.idea
 nosetests.xml
 coverage.xml
 *,cover
@@ -60,6 +59,7 @@ instance/
 
 # Scrapy stuff:
 .scrapy
+.idea
 
 # Sphinx documentation
 docs/_build/
