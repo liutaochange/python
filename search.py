@@ -1,36 +1,41 @@
 import itchat
 import math
-import PIL.Image as Image
+from PIL import Image, ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import os
+import shutil
 
 # 获取到当前文件的目录，并检查是否有saveImg文件夹，如果不存在则自动新建saveImg文件
 File_Path = os.getcwd()
 result = os.listdir(File_Path)
 if "saveImg" in result:
     print('Directory already exists')
+    shutil.rmtree('./saveImg')
+    print('delete success')
+    os.makedirs('./saveImg')
 else:
     print('Directory not exists')
     os.makedirs('./saveImg')
 
-itchat.auto_login(hotReload=True)
+itchat.auto_login()
 friends = itchat.get_friends(update=True)
 user = friends[0]["UserName"]
 
 num = 0
 for i in friends:
     img = itchat.get_head_img(userName=i["UserName"])
-    fileImage = open('./saveImg' + "/" + str(num) + ".jpg",'wb')
+    fileImage = open('./saveImg' + "/" + str(num) + ".jpg", 'wb')
     fileImage.write(img)
     fileImage.close()
     num += 1
 
 ls = os.listdir('./saveImg')
-each_size = int(math.sqrt(float(640*640)/len(ls)))
-lines = int(640/each_size)
+each_size = int(math.sqrt(float(640 * 640) / len(ls)))
+lines = int(640 / each_size)
 image = Image.new('RGB', (640, 640))
 x = 0
 y = 0
-for i in range(0,len(ls)+1):
+for i in range(0, len(ls) + 1):
     try:
         img = Image.open('./saveImg' + "/" + str(i) + ".jpg")
         if img.mode != "RGB":
@@ -46,4 +51,4 @@ for i in range(0,len(ls)+1):
             x = 0
             y += 1
 image.save('./saveImg/' + 'all.jpg')
-itchat.send_image('./saveImg/'+ 'all.jpg', 'filehelper')
+itchat.send_image('./saveImg/' + 'all.jpg', 'filehelper')
