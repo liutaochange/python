@@ -3,6 +3,15 @@ import math
 import PIL.Image as Image
 import os
 
+# 获取到当前文件的目录，并检查是否有saveImg文件夹，如果不存在则自动新建saveImg文件
+File_Path = os.getcwd()
+result = os.listdir(File_Path)
+if "saveImg" in result:
+    print('Directory already exists')
+else:
+    print('Directory not exists')
+    os.makedirs('./saveImg')
+
 itchat.auto_login(hotReload=True)
 friends = itchat.get_friends(update=True)
 user = friends[0]["UserName"]
