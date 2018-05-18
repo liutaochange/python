@@ -5,12 +5,17 @@
 
 ```
 
-# clone project
+# clone 项目到本地
+
 git clone https://github.com/liutaochange/python.git
-# install dependencies
+
+# 安装项目依赖
+
 pip install itchat
 pip install pillow
-# project init
+
+# 到项目目录下，执行Python命令，运行程序
+
 cd python
 python search.py
 
