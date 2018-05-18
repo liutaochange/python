@@ -3,8 +3,8 @@ import math
 import PIL.Image as Image
 import os
 
-itchat.auto_login()
-friends = itchat.get_friends(update=True)[0:]
+itchat.auto_login(hotReload=True)
+friends = itchat.get_friends(update=True)
 user = friends[0]["UserName"]
 
 num = 0
@@ -27,6 +27,7 @@ for i in range(0,len(ls)+1):
         if img.mode != "RGB":
             img = img.convert("RGB")
     except IOError:
+        print(i)
         print("Error")
     else:
         img = img.resize((each_size, each_size), Image.ANTIALIAS)
@@ -35,5 +36,5 @@ for i in range(0,len(ls)+1):
         if x == lines:
             x = 0
             y += 1
-image.save('./saveImg' + "/" + "all.jpg")
-itchat.send_image('./saveImg' + "/" + "all.jpg", 'filehelper')
+image.save('./saveImg/' + 'all.jpg')
+itchat.send_image('./saveImg/'+ 'all.jpg', 'filehelper')
